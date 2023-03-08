@@ -16,3 +16,6 @@ export function SubscribeButton({priceId}: SubscribeButtonProps) {
     </button>
   );
 }
+
+
+  {/*https://github.com/murilo-souza/Ignews-Web-NextJS/blob/main/src/pages/api/auth/%5B...nextauth%5D.ts*/}
