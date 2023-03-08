@@ -1,4 +1,5 @@
 import styles from './styles.module.scss';
+import { useSession, signIn } from 'next-auth/react';
 
 interface SubscribeButtonProps {
     priceId: string;
@@ -6,16 +7,25 @@ interface SubscribeButtonProps {
 
 export function SubscribeButton({priceId}: SubscribeButtonProps) {  
 
+  const {data: session} = useSession();
+
+  function handleSubscribe(){
+    if(!session){
+      signIn('github')
+      return;
+    }
+
+    
+  }
+
   return (
     <button
       type="button"
       className={styles.subscribeButton}
-      
+      onClick={handleSubscribe}
     >
       Subscribe now
     </button>
   );
 }
 
-
-  {/*https://github.com/murilo-souza/Ignews-Web-NextJS/blob/main/src/pages/api/auth/%5B...nextauth%5D.ts*/}
