@@ -5,7 +5,7 @@ import Providers from 'next-auth/providers';
 import GitHubProvider from "next-auth/providers/github";
 import { signIn } from 'next-auth/react';
 
-import { fauna } from '../../../service/fauna'
+import { fauna } from '../../../services/fauna'
 
 
 

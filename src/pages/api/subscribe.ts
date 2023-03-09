@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { stripe } from '../../service/stripe';
+import { stripe } from '../../services/stripe';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         
         const stripeCustomer = await stripe.customers.create({
             email: session.user.email,
-        })
+          });
 
         const StripeCheckoutSession = await stripe.checkout.sessions.create({
             customer: stripeCustomer.id,
