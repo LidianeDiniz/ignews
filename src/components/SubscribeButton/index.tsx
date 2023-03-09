@@ -16,7 +16,7 @@ export function SubscribeButton({priceId}: SubscribeButtonProps) {
       signIn('github')
       return;
     }
-
+   
     try {
       const response = await api.post('/subscribe');
       const { sessionId } = response.data;
@@ -28,6 +28,7 @@ export function SubscribeButton({priceId}: SubscribeButtonProps) {
       alert(error.message);
     }
   }
+
 
   return (
     <button

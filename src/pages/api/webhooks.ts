@@ -38,6 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         process.env.STRIPE_WEBHOOK_SECRET,
       );
     } catch (err) {
+   
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
@@ -79,3 +80,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).end(`Method Not Allowed`);
   }
 };
+
+
+
+
+
