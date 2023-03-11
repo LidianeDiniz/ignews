@@ -81,7 +81,7 @@ $ cp .env.local.example .env.local
 $ stripe listen --forward-to localhost:3000/api/webhooks 
 
 # Para iniciar a aplicação
-$ yarn dev
+$ npm run dev
 
 ```
 
