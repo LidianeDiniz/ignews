@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { RichText } from 'prismic-dom';
-import { getPrismicClient } from '../../../services/prismic';
+import { getPrismicClient } from '../../../../services/prismic';
 import styles from '../post.module.scss';
 
 interface PostProps {
@@ -21,7 +21,7 @@ export default function PostPreview({ post }: PostProps) {
   const router = useRouter();
 
   useEffect(() => {
-    if (session?.activeSubcription) {
+    if (session?.activeSubscription) {
       router.push(`/post/${post.slug}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
