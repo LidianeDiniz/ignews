@@ -14,5 +14,5 @@ export function ActiveLink({
   const { asPath } = useRouter();
 
   const className = asPath === rest.href ? activeClassName : '';
-  return <Link {...rest}>{cloneElement(children, { className })}</Link>;
+  return <Link {...rest} legacyBehavior>{cloneElement(children, { className })}</Link>;
 }

@@ -27,29 +27,27 @@ export default function PostPreview({ post }: PostProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
-  return (
-    <>
-      <Head>
-        <title>{post.title} | Ignews</title>
-      </Head>
-      <main className={styles.container}>
-        <article className={styles.post}>
-          <h1>{post.title}</h1>
-          <time>{post.updatedAt}</time>
-          <div
-            className={`${styles.postContent} ${styles.previewContent}`}
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-          <div className={styles.continueReading}>
-            Wanna continue reading?
-            <Link href="/">
-              <a href="">Subscribe now 🤗</a>
-            </Link>
-          </div>
-        </article>
-      </main>
-    </>
-  );
+  return <>
+    <Head>
+      <title>{post.title} | Ignews</title>
+    </Head>
+    <main className={styles.container}>
+      <article className={styles.post}>
+        <h1>{post.title}</h1>
+        <time>{post.updatedAt}</time>
+        <div
+          className={`${styles.postContent} ${styles.previewContent}`}
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+        <div className={styles.continueReading}>
+          Wanna continue reading?
+          <Link href="/">
+            Subscribe now 🤗
+          </Link>
+        </div>
+      </article>
+    </main>
+  </>;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

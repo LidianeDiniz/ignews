@@ -33,12 +33,12 @@ nav{
             color: var(--white)
         }
 
-        &.acitive{
+        &.active{
             color: var(--white);
             font-weight: bold;
         }
 
-        &.acitive::after{
+        &.active::after{
             content: '';
             height: 3px;
             border-radius: 3px 3px 0 0;
