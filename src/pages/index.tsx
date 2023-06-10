@@ -11,6 +11,12 @@ interface HomeProps{
   }
 }
 
+// Client-side - traz os dados depois que a página já foi carregada completamente.
+// Sever-side -  traz dados dinâmicos para quem esta acessando, com informações em tempo real.
+// Static Site Generation - Gera o HTML estático, páginas iguais para todos usuários.
+// são as três maneiras principais que podemos usar para fazer chamadas a api com Next
+
+
 export default function Home({product}: HomeProps) {
   return (
     <>
