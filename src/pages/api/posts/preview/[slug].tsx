@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -19,6 +19,8 @@ interface PostProps {
 export default function PostPreview({ post }: PostProps) {
   const { data: session } = useSession();
   const router = useRouter();
+
+ 
 
   useEffect(() => {
     if (session?.activeSubscription) {
@@ -71,11 +73,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const session = await getSession();
   const { slug } = params;
+
+  if(!session.activeSubscription){
+    return{
+      redirect: {
+        destination: '/',
+        permanent: false,
+      }
+    }
+
+  }
 
   const prismic = getPrismicClient();
   //TODO: "publication" na aula na verdade é "post" e o getByUID recebe o <any>
-  const response = await prismic.getByUID<any>('post', String(slug), {});
+  const response = await prismic.getByUID<any>('publication', String(slug), {});
   const post = {
     slug,
     title: RichText.asText(response.data.title),

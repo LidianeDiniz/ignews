@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 import * as Prismic from '@prismicio/client';
 import { RichText } from 'prismic-dom';
 import Link from 'next/link';
-import { query as q } from 'faunadb';
+
 
 type Post = {
   slug: string;
@@ -40,10 +40,10 @@ export default function Posts({ posts }: PostsProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient();
-  const response = await prismic.query(
-    [Prismic.predicate.at('document.type', 'post')],
+  const response = await prismic.getByType(
+    Prismic.predicate.at('document.type', 'publication'),
     {
-      fetch: ['post.title', 'post.content'],
+      fetch: ['publication.title', 'publication.content'],
       page: 1,
       pageSize: 100,
     },

@@ -9,6 +9,7 @@ import { fauna } from '../../../services/fauna'
 
 
 
+
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
@@ -26,6 +27,42 @@ export default NextAuth({
   ],
 
   callbacks:{
+    async session( data ){
+     try{
+
+      data.user.email
+      const userActiveSubscription = await fauna.query(
+        q.Get(
+          q.Intersection([
+            q.Match(
+              q.Index('subscription_by_user_ref'),
+              q.Select(
+                "ref",
+                q.Get(
+                  q.Match(
+                    q.Index('user_by_email'),
+                    q.Casefold(data.user.email)
+                  )
+                )
+              )
+            ),
+            q.Match(
+              q.Index('subscription_by_status'),
+              'active'
+            )
+             ] )
+        )
+      )
+      return {
+        ...data.session, userActiveSubscription
+      }
+     } catch{
+      return {
+        ...data.session, activeSubscription: null
+      }
+     }
+    },
+
     async signIn({user, account, profile}){
       const {email} = user 
       

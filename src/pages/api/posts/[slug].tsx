@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const prismic = getPrismicClient(req);
   //TODO: "publication" na aula na verdade é "post" e o getByUID recebe o <any>
-  const response = await prismic.getByUID<any>('post', String(slug), {});
+  const response = await prismic.getByUID<any>('publication', String(slug), {});
   const post = {
     slug,
     title: RichText.asText(response.data.title),
