@@ -25,7 +25,7 @@ export default NextAuth({
   callbacks:{
     async session( {session} ){
      try{      
-      const activeUserSubscription = await fauna.query(
+      const userActiveSubscription = await fauna.query(
         q.Get(
           q.Intersection([
             q.Match(
@@ -49,7 +49,7 @@ export default NextAuth({
       )
       return {
         ...session,
-        activeSubscription: activeUserSubscription ,
+        activeSubscription: userActiveSubscription,
       };
     } catch  {
       return {
@@ -85,6 +85,7 @@ export default NextAuth({
 
         return true;
       } catch(err) {
+        console.log(err);
         return false;
       }
     },

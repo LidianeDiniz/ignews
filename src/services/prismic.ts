@@ -1,11 +1,25 @@
-import * as Prismic from '@prismicio/client';
+import Prismic from '@prismicio/client';
 
-// const endpoint = Prismic.getEndpoint(process.env.PRISMIC_ENDPOINT);
-// export const getPrismicClient = Prismic.createClient(endpoint);
+//essas variaveis pegan os seus valores das variaveis de ambiente
+//const prismicAccessToken = process.env.PRISMIC_ACCESS_TOKEN ?? "";
+//const prismicEndpoint = process.env.PRISMIC_ENDPOINT ?? "";
+
+/* Estamos verificando se o token de acesso do Prismic foi fornecido.
+ Se não tiver sido fornecido (ou seja, a variável prismicAccessToken 
+está vazia), lançamos um erro informando que o token não foi fornecido.*/
+
+//if (!prismicAccessToken) {
+//  throw new Error("Error: PRISMIC_ACCESS_TOKEN not provided.");
+//}
+
 export function getPrismicClient(req?: unknown) {
-    
-  const prismic = Prismic.createClient(process.env.PRISMIC_ENDPOINT, {
-    accessToken: process.env.PRISMIC_ACCESS_TOKEN,
-  });
+  const prismic = Prismic.client(
+      process.env.PRISMIC_ENDPOINT,
+      {
+          req,
+          accessToken: process.env.PRISMIC_ACCESS_TOKEN
+      }
+  )
+
   return prismic;
 }

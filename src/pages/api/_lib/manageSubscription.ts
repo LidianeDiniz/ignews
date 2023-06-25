@@ -34,13 +34,18 @@ export async function saveSubscription(
     // Update -> atualizar campos
 
     await fauna.query(
-      q.Replace(
-        q.Select(
-          'ref',
-          q.Get(q.Match(q.Index('subscription_by_id'), subscriptionId)),
-        ),
-        { data: subscriptionData },
+      q.Update(
+          q.Select(
+              "ref",
+              q.Get(
+                  q.Match(
+                      q.Index("user_by_stripe_customer_id"),
+                      subscriptionId,
+                  )
+              )
+          ),
+      {data: subscriptionData}
       ),
-    );
-  }
+  )
+}
 }

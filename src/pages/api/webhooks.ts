@@ -27,14 +27,14 @@ const relevantEvents = new Set([
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const buf = await buffer(req);
-    const secret = req.headers['stripe-signature'];
+    const secret = req.headers['stripe-signature'] ;
 
     let event: Stripe.Event;
     try {
       event = stripe.webhooks.constructEvent(
         buf,
         secret,
-        process.env.STRIPE_WEBHOOK_SECRET,
+        process.env.STRIPE_WEBHOOK_SECRET || '',
       );
     } catch (err) {
    
@@ -66,8 +66,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             const checkoutSession = event.data
               .object as Stripe.Checkout.Session;
             await saveSubscription(
-              checkoutSession.subscription.toString(),
-              checkoutSession.customer.toString(),
+              checkoutSession.subscription?.toString(),
+              checkoutSession.customer?.toString(),
               true,
             );
             break;
