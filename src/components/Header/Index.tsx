@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 import { SignInButton } from '../SignInButton';
 import Image from 'next/image';
 
-export function Header(){
+export default function Header(){
     return(
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
